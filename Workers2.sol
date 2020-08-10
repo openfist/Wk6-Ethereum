@@ -1,0 +1,16 @@
+import "./People.sol";
+pragma solidity 0.5.12;
+
+contract Workers is People{
+
+    People instance = People(0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c);
+
+    mapping(address => uint) public salary;
+
+    function createWorker (string memory name, uint age, uint height, address _address, uint _salary) public payable costs(100 wei){
+        instance.createPerson.value(msg.value)(name, age, height, _address, _salary);
+
+        salary[_address] = _salary;
+        require(age <= 75, "Age needs to be below 75");
+    }
+}
